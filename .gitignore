@@ -9,3 +9,5 @@
 **/nb-configuration.xml
 **/nb-actions.xml
 /WebOrganizerPOM/Guis/WebOrganizer/target/
+/WebOrganizerPOM/Services/OrganizerServices-api/target/
+/WebOrganizerPOM/Services/OrganizerServices-impl/target/
