@@ -11,3 +11,6 @@
 /WebOrganizerPOM/Guis/WebOrganizer/target/
 /WebOrganizerPOM/Services/OrganizerServices-api/target/
 /WebOrganizerPOM/Services/OrganizerServices-impl/target/
+/WebOrganizerPOM/Model/target/
+/WebOrganizerPOM/Daos/OrganizerDao-impl/target/
+/WebOrganizerPOM/Daos/OrganizerDao-api/target/

@@ -3,47 +3,28 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ark.chr.web.organizer</groupId>
-        <artifactId>Services</artifactId>
+        <artifactId>Daos</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>OrganizerServices-impl</artifactId>
+    <artifactId>OrganizerDao-impl</artifactId>
     <packaging>jar</packaging>
     
     <dependencies>
+        
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>OrganizerServices-api</artifactId>
+            <artifactId>OrganizerDao-api</artifactId>
             <version>${project.version}</version>
         </dependency>
         
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
+            <artifactId>spring-context</artifactId>
         </dependency>
         
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>OrganizerDao-impl</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
     
