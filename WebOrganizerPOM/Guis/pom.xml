@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>WebOrganizer</module>
-    </modules>
+  </modules>
     
     <properties>
         <jsf.version>2.1.7</jsf.version>

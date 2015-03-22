@@ -1,6 +1,7 @@
 package ark.chr.web.organizer.services.impl;
 
-import ark.chr.web.organizer.dao.impl.TestDao;
+import ark.chr.web.organizer.dao.api.ITestDao;
+//import ark.chr.web.organizer.dao.impl.TestDao;
 import ark.chr.web.organizer.model.OrganizerUser;
 import ark.chr.web.organizer.services.api.ITestService;
 import java.io.Serializable;
@@ -21,7 +22,7 @@ public class TestService implements ITestService, Serializable {
     private static final Logger logger = LoggerFactory.getLogger(TestService.class);
     
     @Inject
-    private TestDao testDao;
+    private ITestDao testDao;
 
     @Override
     public String getMsg() {

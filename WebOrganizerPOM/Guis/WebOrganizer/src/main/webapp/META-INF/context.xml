@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/WebOrganizer"/>
+<Context antiJARLocking="true" path="/WebOrganizer">
+			  
+    <ResourceLink name="jdbc/WebOrganizerLocalDataSource"
+                  global="jdbc/WebOrganizerDataSource"
+                  auth="Container"
+                  type="javax.sql.DataSource" />
+</Context>

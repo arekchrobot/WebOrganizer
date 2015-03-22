@@ -3,7 +3,7 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
     
     <appender name="AppFileLogger" class="org.apache.log4j.FileAppender">
-        <param name="file" value="${user.dir}/logs/webconsole.log" />
+        <param name="file" value="${catalina.home}/logs/WebOrganizer/webconsole.log" />
         <param name="append" value="false" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%-5p %d{dd MMM yyyy HH:mm:ss} %c{1} - %m%n" />
@@ -11,7 +11,7 @@
     </appender>
     
     <appender name="BaseFileLogger" class="org.apache.log4j.FileAppender">
-        <param name="file" value="${user.dir}/logs/tomcat.log" />
+        <param name="file" value="${catalina.home}/logs/WebOrganizer/tomcat.log" />
         <param name="append" value="false" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%-5p %d{dd MMM yyyy HH:mm:ss} %c{1} - %m%n" />

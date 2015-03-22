@@ -7,7 +7,7 @@
 **/target/**
 **/lib/**
 **/nb-configuration.xml
-**/nb-actions.xml
+**/nbactions.xml
 /WebOrganizerPOM/Guis/WebOrganizer/target/
 /WebOrganizerPOM/Services/OrganizerServices-api/target/
 /WebOrganizerPOM/Services/OrganizerServices-impl/target/
