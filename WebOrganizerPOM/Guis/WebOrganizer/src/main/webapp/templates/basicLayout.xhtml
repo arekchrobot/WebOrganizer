@@ -5,12 +5,13 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       >
-
-    <ui:composition template="templates/basicLayout.xhtml">
-        <ui:define name="content">
-            <h1>JSF 2.0 + Spring Example</h1>
-            #{test.text}
-        </ui:define>
-    </ui:composition>
-
+    <h:head>
+        <title>Web Organizer</title>
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.jpg']}"/>
+    </h:head>
+    <h:body>
+        <div>
+            <ui:insert name="content"/>
+        </div>
+    </h:body>
 </html>
