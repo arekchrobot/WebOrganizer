@@ -1,7 +1,6 @@
 package ark.chr.web.organizer.services.impl;
 
 import ark.chr.web.organizer.dao.api.ITestDao;
-//import ark.chr.web.organizer.dao.impl.TestDao;
 import ark.chr.web.organizer.model.OrganizerUser;
 import ark.chr.web.organizer.services.api.ITestService;
 import java.io.Serializable;
