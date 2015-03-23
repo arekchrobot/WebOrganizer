@@ -1,5 +1,6 @@
 package ark.chr.web.organizer.dao.impl;
 
+import ark.chr.web.organizer.dao.api.ITestDao;
 import ark.chr.web.organizer.model.OrganizerUser;
 import javax.inject.Inject;
 import static org.assertj.core.api.Assertions.*;
@@ -24,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TestDaoTest {
 
     @Inject
-    private TestDao sut;
+    private ITestDao sut;
 
     public TestDaoTest() {
     }
