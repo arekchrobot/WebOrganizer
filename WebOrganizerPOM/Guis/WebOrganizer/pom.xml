@@ -4,12 +4,12 @@
     <parent>
         <artifactId>Guis</artifactId>
         <groupId>ark.chr.web.organizer</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <groupId>ark.chr.web.organizer</groupId>
     <artifactId>WebOrganizer</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>war</packaging>
 
     <name>WebOrganizer</name>
@@ -20,6 +20,16 @@
     </properties>
     
     <dependencies>
+        
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>overcast</artifactId>
+        </dependency>
         
         <dependency>
             <groupId>com.sun.faces</groupId>

@@ -4,14 +4,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
         <title>Web Organizer</title>
         <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.jpg']}"/>
+        <h:outputStylesheet library="css" name="organizer.css"/>
     </h:head>
     <h:body>
-        <div>
-            <ui:insert name="content"/>
-        </div>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="center">
+                <ui:insert name="content"/>
+            </p:layoutUnit>
+        </p:layout>
     </h:body>
 </html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      >
+
+    <ui:composition template="templates/basicLayout.xhtml">
+        <ui:define name="content">
+            <h:form id="login" prependId="false"
+                onsubmit="document.#{p:component('login')}.action = '#{request.contextPath}/j_spring_security_check';">
+
+                <p:outputLabel value="#{myMessages['login.form.email.label']} " 
+                               for="j_username"/>
+                <p:inputText id="j_username" required="true"/>
+
+                <p:outputLabel value="#{myMessages['login.form.password.label']} " 
+                               for="j_password"/>
+                <p:password id="j_password" required="true"/>
+
+                <p:commandButton value="#{myMessages['login.form.button.value']}" 
+                                 type="submit" ajax="false"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

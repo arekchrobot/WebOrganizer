@@ -6,7 +6,20 @@
               version="2.1">
  
     <application>
-        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+        <locale-config>
+            <default-locale>en</default-locale>
+            <supported-locale>pl</supported-locale>
+        </locale-config>
+        <el-resolver>
+            org.springframework.web.jsf.el.SpringBeanFacesELResolver
+        </el-resolver>
+        <message-bundle>
+            CustomValidationMessages
+        </message-bundle>
+        <resource-bundle>
+            <base-name>MyMessages</base-name>
+            <var>myMessages</var>
+        </resource-bundle>
     </application>
  
 </faces-config>

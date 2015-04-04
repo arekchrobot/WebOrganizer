@@ -4,13 +4,13 @@
     <parent>
         <groupId>ark.chr.web.organizer</groupId>
         <artifactId>WebOrganizerPOM</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     <artifactId>Guis</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>WebOrganizer</module>
-  </modules>
+    </modules>
     
     <properties>
         <jsf.version>2.1.7</jsf.version>
@@ -64,6 +64,12 @@
                 <groupId>com.sun.el</groupId>
                 <artifactId>el-ri</artifactId>
                 <version>1.0</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.primefaces.themes</groupId>
+                <artifactId>overcast</artifactId>
+                <version>1.0.10</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

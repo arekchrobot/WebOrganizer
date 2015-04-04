@@ -1,6 +1,7 @@
 package ark.chr.web.organizer.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -56,7 +57,7 @@ public class OrganizerUser extends BaseEntity implements Serializable {
     private Collection<OrganizerRole> roles = new HashSet<>();
     
     @OneToMany(mappedBy = "owner")
-    private List<OrganizerEvent> events;
+    private List<OrganizerEvent> events = new ArrayList<>();
     
     public OrganizerUser() {
         active = false;
