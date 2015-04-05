@@ -8,20 +8,25 @@
       >
 
     <ui:composition template="templates/basicLayout.xhtml">
+        <ui:define name="title">#{myMessages['login.title']}</ui:define>
         <ui:define name="content">
             <h:form id="login" prependId="false"
-                onsubmit="document.#{p:component('login')}.action = '#{request.contextPath}/j_spring_security_check';">
+                    onsubmit="document.#{p:component('login')}.action = '#{request.contextPath}/j_spring_security_check';">
 
-                <p:outputLabel value="#{myMessages['login.form.email.label']} " 
-                               for="j_username"/>
-                <p:inputText id="j_username" required="true"/>
+                <p:panel header="#{myMessages['login.panel.header']}" styleClass="panel-layout">
+                    <p:panelGrid columns="2" style="width: 100%" columnClasses="twenty-percent, eighty-percent">
+                        <p:outputLabel value="#{myMessages['login.form.email.label']} " 
+                                       for="j_username"/>
+                        <p:inputText id="j_username" required="true" styleClass="label-percent"/>
 
-                <p:outputLabel value="#{myMessages['login.form.password.label']} " 
-                               for="j_password"/>
-                <p:password id="j_password" required="true"/>
+                        <p:outputLabel value="#{myMessages['login.form.password.label']} " 
+                                       for="j_password"/>
+                        <p:password id="j_password" required="true" styleClass="label-percent"/>
+                    </p:panelGrid>
 
-                <p:commandButton value="#{myMessages['login.form.button.value']}" 
-                                 type="submit" ajax="false"/>
+                    <p:commandButton value="#{myMessages['login.form.button.value']}" 
+                                     type="submit" ajax="false"/>
+                </p:panel>
             </h:form>
         </ui:define>
     </ui:composition>

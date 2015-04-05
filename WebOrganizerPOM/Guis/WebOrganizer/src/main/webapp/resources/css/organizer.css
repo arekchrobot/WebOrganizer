@@ -9,3 +9,9 @@
 .label-percent {
      width: 98%;
 }
+
+.panel-layout {
+    margin-bottom:20px; 
+    width: 60%; 
+    margin: 0 auto;
+}

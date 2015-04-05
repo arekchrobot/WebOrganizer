@@ -7,9 +7,10 @@
       xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
-        <title>Web Organizer</title>
+        <title>Web Organizer <ui:insert name="title"/></title>
         <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.jpg']}"/>
         <h:outputStylesheet library="css" name="organizer.css"/>
+        <ui:insert name="head"/>
     </h:head>
     <h:body>
         <p:layout fullPage="true">

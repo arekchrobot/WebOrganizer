@@ -9,9 +9,11 @@
       >
 
     <ui:composition template="templates/basicLayout.xhtml">
+        <ui:define name="title">#{myMessages['register.title']}</ui:define>
         <ui:define name="content">
             <h:form>
-                <p:panel header="#{myMessages['register.panel.header']}" style="margin-bottom:20px">
+                <p:growl id="growl" showDetail="true" severity="fatal"/>
+                <p:panel header="#{myMessages['register.panel.header']}" styleClass="panel-layout">
                     <p:panelGrid columns="2" style="width: 100%" columnClasses="twenty-percent, eighty-percent">
                         <p:outputLabel value="#{myMessages['register.form.email.label']} " for="login"/>
                         <p:column>

@@ -11,8 +11,9 @@
     <http auto-config="true" use-expressions="true">
         <form-login 
             login-page="/login.xhtml" 
-            authentication-failure-url="/register.xhtml"
-            default-target-url="/secured/home.xhtml"/>
+            authentication-failure-url="/loginError.xhtml"
+            default-target-url="/secured/home.xhtml"
+            always-use-default-target="true"/>
         <remember-me/>
         <logout logout-success-url="/index.xhtml"/>
         
