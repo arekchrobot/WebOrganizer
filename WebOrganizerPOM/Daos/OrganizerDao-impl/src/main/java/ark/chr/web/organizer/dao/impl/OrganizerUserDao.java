@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public class OrganizerUserDao extends CrudDao<OrganizerUser> implements IOrganizerUserDao, Serializable {
-    
+
     @Inject
     private PasswordEncoder passwordEncoder;
     @Inject
@@ -33,8 +33,10 @@ public class OrganizerUserDao extends CrudDao<OrganizerUser> implements IOrganiz
         entity.setPassword(encodedPassword);
         update(entity);
         OrganizerRole role = roleDao.findRoleByName("ROLE_USER");
-        entity.getRoles().add(role);
-        update(entity);
+        if (role != null) {
+            entity.getRoles().add(role);
+            update(entity);
+        }
     }
 
     @Override

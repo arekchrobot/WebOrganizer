@@ -51,9 +51,12 @@ public class OrganizerRole extends BaseEntity implements Serializable, GrantedAu
     public String getAuthority() {
         return name;
     }
-    
+
     @Override
     public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
         GrantedAuthority ga = (GrantedAuthority) o;
         return (getAuthority().equals(ga.getAuthority()));
     }

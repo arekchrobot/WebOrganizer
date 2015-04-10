@@ -31,6 +31,11 @@
           class="org.springframework.orm.hibernate4.HibernateTransactionManager"
           p:sessionFactory-ref="sessionFactory" />
     
+    <bean id="passwordEncoder" 
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <constructor-arg name="strength" value="11"/>
+    </bean> 
+    
     <tx:annotation-driven />
     
     <context:component-scan base-package="ark.chr.web.organizer.dao"/>
