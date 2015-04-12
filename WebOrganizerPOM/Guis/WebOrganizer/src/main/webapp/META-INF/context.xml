@@ -5,4 +5,8 @@
                   global="jdbc/WebOrganizerDataSource"
                   auth="Container"
                   type="javax.sql.DataSource" />
+    
+    <ResourceLink name="mail/Session"
+                  global="mail/Session"
+                  type="javax.mail.Session" />
 </Context>

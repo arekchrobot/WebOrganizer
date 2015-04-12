@@ -52,6 +52,23 @@
             <version>${project.version}</version>
         </dependency>
         
+        <!-- Velocity mail dependency-->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>com.springsource.org.apache.velocity</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+        
         <!--Tests-->
         <dependency>
             <groupId>org.assertj</groupId>

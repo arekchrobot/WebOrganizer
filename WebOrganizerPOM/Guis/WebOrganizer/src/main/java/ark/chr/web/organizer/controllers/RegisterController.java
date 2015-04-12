@@ -1,6 +1,7 @@
 package ark.chr.web.organizer.controllers;
 
 import ark.chr.web.organizer.model.OrganizerUser;
+import ark.chr.web.organizer.services.api.IMailRegisterConfirmation;
 import ark.chr.web.organizer.services.api.IRegisterService;
 import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
@@ -24,6 +25,8 @@ public class RegisterController {
 
     @Inject
     private IRegisterService registerService;
+    @Inject
+    private IMailRegisterConfirmation mailRegisterConfirmation;
 
     private OrganizerUser registerUser;
 
@@ -41,10 +44,12 @@ public class RegisterController {
 
     public String registerNewUser() {
         logger.info("Registering new user: " + registerUser.getLogin());
+        FacesContext facesContext = FacesContext.getCurrentInstance();
         if (registerService.registerUser(registerUser)) {
+            mailRegisterConfirmation.sendConfirmRegistrationEmail(registerUser, 
+                    facesContext.getExternalContext().getRequestLocale());
             return REGISTER_SUCCESS;
         }
-        FacesContext facesContext = FacesContext.getCurrentInstance();
         ResourceBundle bundle
                 = facesContext.getApplication().getResourceBundle(
                         facesContext, "myMessages");
