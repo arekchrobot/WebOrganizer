@@ -17,9 +17,9 @@ import org.springframework.context.annotation.Scope;
  */
 @Named("registerConfirmation")
 @Scope("request")
-public class RegisterConfirmationController {
+public class RegisterConfirmation {
     
-    private static final Logger logger = LoggerFactory.getLogger(RegisterConfirmationController.class);
+    private static final Logger logger = LoggerFactory.getLogger(RegisterConfirmation.class);
 
     private boolean registerSuccess = false;
     private boolean registerExpired = false;
@@ -31,7 +31,7 @@ public class RegisterConfirmationController {
     @Inject
     private IMailRegisterConfirmation mailRegisterConfirmation;
 
-    public RegisterConfirmationController() {
+    public RegisterConfirmation() {
         userToConfirmId = FacesContext.getCurrentInstance()
                 .getExternalContext().getRequestParameterMap().get("s");
         digest = FacesContext.getCurrentInstance()

@@ -18,19 +18,21 @@ import org.springframework.context.annotation.Scope;
  */
 @Named("register")
 @Scope("request")
-public class RegisterController {
+public class Register {
 
-    private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
+    private static final Logger logger = LoggerFactory.getLogger(Register.class);
     private static final String REGISTER_SUCCESS = "registerSuccess";
 
     @Inject
     private IRegisterService registerService;
     @Inject
     private IMailRegisterConfirmation mailRegisterConfirmation;
+    @Inject
+    private LocaleManager localeManager;
 
     private OrganizerUser registerUser;
 
-    public RegisterController() {
+    public Register() {
         registerUser = new OrganizerUser();
     }
 
@@ -47,7 +49,7 @@ public class RegisterController {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         if (registerService.registerUser(registerUser)) {
             mailRegisterConfirmation.sendConfirmRegistrationEmail(registerUser, 
-                    facesContext.getExternalContext().getRequestLocale());
+                    localeManager.getLocale());
             return REGISTER_SUCCESS;
         }
         ResourceBundle bundle

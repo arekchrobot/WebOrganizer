@@ -1,17 +1,21 @@
 .twenty-percent {
-     width: 20%;
+    width: 20%;
 }
 
 .eighty-percent {
-     width: 80%;
+    width: 80%;
 }
 
 .label-percent {
-     width: 98%;
+    width: 98%;
 }
 
 .panel-layout {
     margin-bottom:20px; 
     width: 60%; 
     margin: 0 auto;
+}
+
+.vertial-center {
+    vertical-align: middle
 }
