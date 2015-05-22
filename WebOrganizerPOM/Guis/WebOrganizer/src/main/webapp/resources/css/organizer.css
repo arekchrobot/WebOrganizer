@@ -19,3 +19,27 @@
 .vertial-center {
     vertical-align: middle
 }
+
+.schedule-width {
+    width: 98%;
+}
+
+.main-div-scrollable {
+    position: absolute; 
+    margin: 0px; 
+    z-index: 0; 
+    top: 0px; 
+    padding-bottom: 0.1%; 
+    left: 0px; 
+    right: 0px;
+}
+
+.main-div-noscrollable {
+    position: absolute; 
+    margin: 0px; 
+    z-index: 0; 
+    top: 0px; 
+    bottom: 0px; 
+    left: 0px; 
+    right: 0px;
+}

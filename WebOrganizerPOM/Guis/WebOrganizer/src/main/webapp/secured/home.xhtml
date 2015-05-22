@@ -4,11 +4,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
       >
 
-    <ui:composition template="../templates/basicLayout.xhtml">
+    <ui:composition template="../templates/scrollableLayout.xhtml">
         <ui:define name="content">
-            This page is secured
+            <h:form>
+                <h:panelGrid columnClasses="schedule-width">
+                    Schedule
+                    <p:schedule value="#{scheduleView.schedule}" 
+                                locale="#{localeManager.language}"/>
+                </h:panelGrid>
+            </h:form>
         </ui:define>
     </ui:composition>
 
