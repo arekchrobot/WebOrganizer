@@ -26,10 +26,15 @@ public class OrganizerEvent extends BaseEntity implements Serializable {
     @Column
     private String description;
     
-    @Column(name = "event_date")
+    @Column(name = "event_date_start")
     @NotNull
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date eventDate;
+    private Date eventDateStart;
+    
+    @Column(name = "event_date_end")
+    @NotNull
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date eventDateEnd;
     
     @Column
     private String address;
@@ -57,14 +62,22 @@ public class OrganizerEvent extends BaseEntity implements Serializable {
         this.description = description;
     }
 
-    public Date getEventDate() {
-        return eventDate;
+    public Date getEventDateStart() {
+        return eventDateStart;
     }
 
-    public void setEventDate(Date eventDate) {
-        this.eventDate = eventDate;
+    public void setEventDateStart(Date eventDateStart) {
+        this.eventDateStart = eventDateStart;
     }
 
+    public Date getEventDateEnd() {
+        return eventDateEnd;
+    }
+
+    public void setEventDateEnd(Date eventDateEnd) {
+        this.eventDateEnd = eventDateEnd;
+    }
+    
     public String getAddress() {
         return address;
     }

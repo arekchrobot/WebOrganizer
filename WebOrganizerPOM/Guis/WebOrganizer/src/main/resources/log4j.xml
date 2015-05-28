@@ -18,9 +18,16 @@
         </layout>
     </appender>
     
+    <appender name="ConsoleLogger" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p %d{dd MMM yyyy HH:mm:ss} %c{1} - %m%n" />
+        </layout>
+    </appender>
+    
     <logger name="ark.chr">
         <level value="debug" />
         <appender-ref ref="AppFileLogger" />
+        <appender-ref ref="ConsoleLogger" />
     </logger>
     
     <root>
