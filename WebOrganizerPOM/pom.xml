@@ -230,6 +230,13 @@
                 <version>1.4</version>
             </dependency>
             
+            <!--JSF ViewScope for Spring-->
+            <dependency>
+                <groupId>com.github.javaplugs</groupId>
+                <artifactId>spring-jsf</artifactId>
+                <version>0.1</version>
+            </dependency>
+            
         </dependencies>
     </dependencyManagement>
     
@@ -244,6 +251,12 @@
             <id>com.springsource.repository.bundles.external</id>
             <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
             <url>http://repository.springsource.com/maven/bundles/external</url>
+        </repository>
+        
+        <!--Github JSF ViewScope for Spring repo-->
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
     

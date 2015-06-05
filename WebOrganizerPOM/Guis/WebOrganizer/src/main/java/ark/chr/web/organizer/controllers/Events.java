@@ -21,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class Events {
     
     private static final Logger logger = LoggerFactory.getLogger(Events.class);
+    private static final String SUCCESS_PAGE = "home.xhtml?faces-redirect=true";
 
     private OrganizerEvent event;
 
@@ -47,14 +48,22 @@ public class Events {
         OrganizerUser user = ((UserDetailsAdapter)SecurityContextHolder
                 .getContext().getAuthentication().getPrincipal()).getUser();
         event.setOwner(user);
+        //TODO poprawic!!!
+        event.setCustomReminder(3);
         logger.info("Adding new event for user: " + user.getLogin());
         boolean success = eventService.addNewEvent(event);
         if (success) {
             logger.info("Successfully added new event for user: " + user.getLogin());
-            return "home.xhtml?faces-redirect=true";
+            return SUCCESS_PAGE;
         } else {
             logger.warn("Error adding new event for user: " + user.getLogin());
             return null;
         }
+    }
+    
+    public String editEvent(OrganizerEvent event) {
+        logger.info("Saving changes to event: " + event.getId());
+        eventService.saveEventChanges(event);
+        return SUCCESS_PAGE;
     }
 }

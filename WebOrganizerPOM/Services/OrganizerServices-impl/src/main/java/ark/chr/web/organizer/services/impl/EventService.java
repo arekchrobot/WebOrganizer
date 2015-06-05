@@ -5,6 +5,7 @@ import ark.chr.web.organizer.model.OrganizerEvent;
 import ark.chr.web.organizer.model.OrganizerUser;
 import ark.chr.web.organizer.services.api.IEventService;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import org.slf4j.Logger;
@@ -32,8 +33,18 @@ public class EventService implements IEventService, Serializable {
     }
 
     @Override
-    public List<OrganizerEvent> getAllEventsForUser(OrganizerUser user) {
-        return eventDao.getAllEventsForUser(user);
+    public List<OrganizerEvent> findAllEventsForUser(OrganizerUser user) {
+        return eventDao.findAllEventsForUser(user);
+    }
+
+    @Override
+    public OrganizerEvent findEventByNameStartDateAndUser(String name, Date startDate, OrganizerUser user) {
+        return eventDao.findEventByNameStartDateAndUser(name, startDate, user);
+    }
+
+    @Override
+    public void saveEventChanges(OrganizerEvent event) {
+        eventDao.update(event);
     }
 
 }

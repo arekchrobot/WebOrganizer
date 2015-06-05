@@ -123,6 +123,11 @@
         </dependency>
         
         <dependency>
+            <groupId>com.github.javaplugs</groupId>
+            <artifactId>spring-jsf</artifactId>
+        </dependency>
+        
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>OrganizerServices-impl</artifactId>
             <version>${project.version}</version>

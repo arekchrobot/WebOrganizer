@@ -8,13 +8,17 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Arek
  */
 @FacesValidator("eventDateRangeValidator")
-public class EventDateRangeValidator implements Validator{
+public class EventDateRangeValidator implements Validator {
+    
+    private static final Logger logger = LoggerFactory.getLogger(EventDateRangeValidator.class);
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uic, Object value) throws ValidatorException {
@@ -30,12 +34,13 @@ public class EventDateRangeValidator implements Validator{
         Date startDate = (Date) startDateValue;
         Date endDate = (Date) value;
         if(endDate.before(startDate)) {
+            logger.info("End date of event set before start date.");
             ResourceBundle bundle
                 = facesContext.getApplication().getResourceBundle(
                         facesContext, "myMessages");
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_FATAL,
-                        bundle.getString("register.error.message.header"),
-                        bundle.getString("register.error.message.detail")));
+                        bundle.getString("eventDateRangeValidator.header"),
+                        bundle.getString("eventDateRangeValidator.detail")));
         }
     }
 

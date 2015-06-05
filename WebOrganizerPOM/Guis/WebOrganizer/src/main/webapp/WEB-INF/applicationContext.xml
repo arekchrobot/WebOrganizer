@@ -9,6 +9,7 @@
 
     <context:component-scan base-package="ark.chr.web.organizer.controllers" />
     
-    <import resource="classpath:/spring/spring-service.xml"/> 
-    <import resource="classpath:/spring/spring-security.xml"/> 
+    <import resource="classpath:/spring/spring-service.xml"/>
+    <import resource="classpath:/spring/spring-security.xml"/>
+    <import resource="classpath:/com/github/javaplugs/jsf/jsfSpringScope.xml"/>
 </beans>

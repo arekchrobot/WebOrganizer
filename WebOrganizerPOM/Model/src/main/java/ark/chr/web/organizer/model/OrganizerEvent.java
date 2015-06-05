@@ -28,12 +28,12 @@ public class OrganizerEvent extends BaseEntity implements Serializable {
     
     @Column(name = "event_date_start")
     @NotNull
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date eventDateStart;
     
     @Column(name = "event_date_end")
     @NotNull
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date eventDateEnd;
     
     @Column
@@ -41,6 +41,9 @@ public class OrganizerEvent extends BaseEntity implements Serializable {
     
     @ManyToOne
     private OrganizerUser owner;
+    
+    @Column(name = "reminder")
+    private int customReminder;
     
     @Enumerated(EnumType.STRING)
     @NotNull
@@ -92,6 +95,14 @@ public class OrganizerEvent extends BaseEntity implements Serializable {
 
     public void setOwner(OrganizerUser owner) {
         this.owner = owner;
+    }
+
+    public int getCustomReminder() {
+        return customReminder;
+    }
+
+    public void setCustomReminder(int customReminder) {
+        this.customReminder = customReminder;
     }
 
     public Priority getPriority() {
