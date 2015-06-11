@@ -48,8 +48,6 @@ public class Events {
         OrganizerUser user = ((UserDetailsAdapter)SecurityContextHolder
                 .getContext().getAuthentication().getPrincipal()).getUser();
         event.setOwner(user);
-        //TODO poprawic!!!
-        event.setCustomReminder(3);
         logger.info("Adding new event for user: " + user.getLogin());
         boolean success = eventService.addNewEvent(event);
         if (success) {

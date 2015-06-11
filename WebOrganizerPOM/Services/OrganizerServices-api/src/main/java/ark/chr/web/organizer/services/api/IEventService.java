@@ -18,4 +18,6 @@ public interface IEventService {
     OrganizerEvent findEventByNameStartDateAndUser(String name, Date startDate, OrganizerUser user);
     
     void saveEventChanges(OrganizerEvent event);
+    
+    List<OrganizerEvent> createNotificationsForEvents(OrganizerUser user);
 }

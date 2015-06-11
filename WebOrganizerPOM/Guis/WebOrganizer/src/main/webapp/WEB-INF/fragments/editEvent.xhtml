@@ -4,77 +4,78 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:p="http://primefaces.org/ui">
-    <h:form>
+    <h:form id="editEventForm">
         <p:panelGrid columns="2" style="width: 100%" columnClasses="twenty-percent, eighty-percent">
             <p:outputLabel value="#{myMessages['event.form.name.label']} " 
-                           for="name"/>
+                           for="editName"/>
             <p:column>
-                <p:inputText value="#{events.event.name}" styleClass="label-percent"
-                             required="true" id="name"
+                <p:inputText value="#{scheduleView.event.name}" styleClass="label-percent"
+                             required="true" id="editName"
                              requiredMessage="#{myMessages['event.form.name.requiredMessage']}"/>
-                <p:message for="name" style="color:red"/>
+                <p:message for="editName" style="color:red"/>
             </p:column>
 
             <p:outputLabel value="#{myMessages['event.form.startDate.label']} " 
-                           for="dateStart"/>
+                           for="editDateStart"/>
             <p:column>
-                <p:calendar id="dateStart" value="#{events.event.eventDateStart}"
+                <p:calendar id="editDateStart" value="#{scheduleView.event.eventDateStart}"
                             locale="#{localeManager.language}"
                             pattern="dd/MM/yyyy HH:mm:ss" required="true">
-                    <p:ajax event="dateSelect" update="dateEnd"/>
+                    <p:ajax event="dateSelect" update="editDateEnd"/>
                 </p:calendar>
             </p:column>
 
             <p:outputLabel value="#{myMessages['event.form.endDate.label']} " 
-                           for="dateEnd"/>
+                           for="editDateEnd"/>
             <p:column>
-                <p:calendar id="dateEnd" value="#{events.event.eventDateEnd}"
+                <p:calendar id="editDateEnd" value="#{scheduleView.event.eventDateEnd}"
                             locale="#{localeManager.language}" 
                             mindate="#{events.event.eventDateStart}"
                             pattern="dd/MM/yyyy HH:mm:ss" required="true">
-                    <f:attribute name="startDate" value="#{events.event.eventDateStart}"/>
+                    <f:attribute name="editDateEnd" value="#{events.event.eventDateStart}"/>
                     <f:validator validatorId="eventDateRangeValidator"/>
                 </p:calendar>
             </p:column>
 
             <p:outputLabel value="#{myMessages['event.form.description.label']}" 
-                           for="description"/>
+                           for="editDescription"/>
             <p:column>
-                <p:inputText id="description" value="#{events.event.description}"
+                <p:inputText id="editDescription" value="#{scheduleView.event.description}"
                              styleClass="label-percent"/>
-                <p:message for="description" style="color:red"/>
+                <p:message for="editDescription" style="color:red"/>
             </p:column>
 
             <p:outputLabel value="#{myMessages['event.form.address.label']}" 
-                           for="address"/>
+                           for="editAddress"/>
             <p:column>
-                <p:inputText id="address" value="#{events.event.address}"
+                <p:inputText id="editAddress" value="#{scheduleView.event.address}"
                              styleClass="label-percent"/>
-                <p:message for="address" style="color:red"/>
+                <p:message for="editAddress" style="color:red"/>
             </p:column>
 
             <p:outputLabel value="#{myMessages['event.form.priority.label']}" 
-                           for="prior"/>
+                           for="editPrior"/>
             <p:column>
-                <p:selectOneMenu id="prior" value="#{events.event.priority}" required="true"
-                                 requiredMessage="#{myMessages['event.form.priority.requiredMessage']}">
+                <p:selectOneMenu id="editPrior" value="#{scheduleView.event.priority}" required="true"
+                                 requiredMessage="#{myMessages['event.form.priority.requiredMessage']}"
+                                 rendered="#{scheduleView.event.priority != null}">
                     <f:selectItems value="#{events.priorities}" var="priority"
                                    itemValue="#{priority}" itemLabel="#{priority.name()}"/>
                 </p:selectOneMenu>
-                <p:message for="prior" style="color:red"/>
+                <p:message for="editPrior" style="color:red"/>
             </p:column>
-            
-            <p:outputLabel value="#{myMessages['event.form.reminder.label']}" for="reminder"/>
+
+            <p:outputLabel value="#{myMessages['event.form.reminder.label']}" for="editReminder"/>
             <p:column>
-                <p:inputText id="reminder" value="#{events.event.customReminder}"
+                <p:inputText id="editReminder" value="#{scheduleView.event.customReminder}"
                              styleClass="label-percent" 
                              validatorMessage="#{myMessages['event.form.reminder.validatorMessage']}">
                     <f:convertNumber integerOnly="true"/>
                 </p:inputText>
-                <p:message for="reminder" style="color:red"/>
+                <p:message for="editReminder" style="color:red"/>
             </p:column>
         </p:panelGrid>
-        <p:commandButton value="#{myMessages['event.add.form.button']}" 
-                         action="#{events.addNewEvent()}"/>
+        <p:commandButton value="#{myMessages['event.edit.form.button']}" 
+                         action="#{events.editEvent(scheduleView.event)}"/>
     </h:form>
 </ui:composition>
