@@ -8,13 +8,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -52,52 +52,62 @@ public class Notifications implements Serializable {
 
             if (!notifiedUsers.isEmpty()) {
                 if (notifiedUsers.contains(user.getLogin())) {
-                    if (lastNotifiedDate.compareTo(current) == 0) {
-                        logger.info("Already created notification for user: "
-                                + user.getLogin()
-                                + " at date: " + lastNotifiedDate.toString());
-                    } else {
+//                    if (isSameDay(lastNotifiedDate, new Date())) {
+//                        logger.info("Already created notification for user: "
+//                                + user.getLogin()
+//                                + " at date: " + lastNotifiedDate.toString());
+//                    } else {
                         logger.info("User exists in cookie but no notification at date: "
                                 + lastNotifiedDate.toString());
                         CookiesUtil.setCookie("date", current.toString());
-                        generateJsfNotificationsFromEvents(user, current);
-                    }
+                        generateJsfNotificationsFromEvents(user);
+//                    }
                 } else {
                     logger.info("There are users in cookie but not user with login: "
                             + user.getLogin());
                     CookiesUtil.setCookie("date", current.toString());
                     String newAmountOfUsers = users.getValue() + "," + user.getLogin();
                     CookiesUtil.setCookie("users", newAmountOfUsers);
-                    generateJsfNotificationsFromEvents(user, current);
+                    generateJsfNotificationsFromEvents(user);
                 }
             } else {
                 logger.info("No users in cookie");
                 CookiesUtil.setCookie("users", user.getLogin());
                 CookiesUtil.setCookie("date", current.toString());
-                generateJsfNotificationsFromEvents(user, current);
+                generateJsfNotificationsFromEvents(user);
             }
         } else {
             logger.info("No cookies found for notifications.");
             CookiesUtil.setCookie("users", user.getLogin());
             CookiesUtil.setCookie("date", current.toString());
-            generateJsfNotificationsFromEvents(user, current);
+            generateJsfNotificationsFromEvents(user);
         }
         return result;
     }
 
-    private void generateJsfNotificationsFromEvents(OrganizerUser user, Date current) {
+    private void generateJsfNotificationsFromEvents(OrganizerUser user) {
         List<OrganizerEvent> eventsToNotify = eventService.createNotificationsForEvents(user);
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ResourceBundle bundle = facesContext.getApplication().getResourceBundle(
                 facesContext, "myMessages");
         for (OrganizerEvent eventsToNotify1 : eventsToNotify) {
-            long daysDiff = eventsToNotify1.getEventDateStart().getTime() - current.getTime();
-            daysDiff = TimeUnit.DAYS.convert(daysDiff, TimeUnit.MILLISECONDS);
+            int daysDiff = eventService.getDaysDifferenceFromCurrentTime(eventsToNotify1.getEventDateStart());
             FacesMessage notification = new FacesMessage(FacesMessage.SEVERITY_INFO,
                     bundle.getString("notification.prefix") + " "
                     + daysDiff + " " + bundle.getString("notification.suffix"),
                     eventsToNotify1.getName());
             result.add(notification);
         }
+    }
+
+    private boolean isSameDay(Date firstDate, Date secondDate) {
+        Calendar fisrtCalendar = Calendar.getInstance();
+        fisrtCalendar.setTime(firstDate);
+        Calendar secondCalendar = Calendar.getInstance();
+        secondCalendar.setTime(secondDate);
+        
+        return fisrtCalendar.get(Calendar.DAY_OF_MONTH) == secondCalendar.get(Calendar.DAY_OF_MONTH)
+                && fisrtCalendar.get(Calendar.MONTH) == secondCalendar.get(Calendar.MONTH)
+                && fisrtCalendar.get(Calendar.YEAR) == secondCalendar.get(Calendar.YEAR);
     }
 }

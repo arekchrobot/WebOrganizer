@@ -13,5 +13,7 @@ public interface IOrganizerEventDao extends ICrudDao<OrganizerEvent> {
 
     List<OrganizerEvent> findAllEventsForUser(OrganizerUser user);
     
+    List<OrganizerEvent> findAllEventsForUserWhereStartDateGreaterEqualThanNow(OrganizerUser user);
+    
     OrganizerEvent findEventByNameStartDateAndUser(String name, Date startDate, OrganizerUser user);
 }

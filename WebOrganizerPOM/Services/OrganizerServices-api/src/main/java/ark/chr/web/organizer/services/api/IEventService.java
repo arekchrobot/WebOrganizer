@@ -20,4 +20,6 @@ public interface IEventService {
     void saveEventChanges(OrganizerEvent event);
     
     List<OrganizerEvent> createNotificationsForEvents(OrganizerUser user);
+    
+    int getDaysDifferenceFromCurrentTime(Date date);
 }

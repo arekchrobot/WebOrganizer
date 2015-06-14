@@ -6,10 +6,13 @@ import ark.chr.web.organizer.model.OrganizerUser;
 import ark.chr.web.organizer.services.api.IEventService;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -30,7 +33,7 @@ public class EventService implements IEventService, Serializable {
     private static final int LOW_PRIOR_DAYS_AMOUNT = 1;
 
     @Inject
-    IOrganizerEventDao eventDao;
+    private IOrganizerEventDao eventDao;
 
     @Override
     public boolean addNewEvent(OrganizerEvent event) {
@@ -69,20 +72,19 @@ public class EventService implements IEventService, Serializable {
 
     @Override
     public List<OrganizerEvent> createNotificationsForEvents(OrganizerUser user) {
-        List<OrganizerEvent> allEvents = eventDao.findAllEventsForUser(user);
+        List<OrganizerEvent> allEvents
+                = eventDao.findAllEventsForUserWhereStartDateGreaterEqualThanNow(user);
         List<OrganizerEvent> result = new ArrayList<>();
 
-        Date currentDate = new Date();
         for (OrganizerEvent event : allEvents) {
-            long daysDiff = event.getEventDateStart().getTime() - currentDate.getTime();
-            daysDiff = TimeUnit.DAYS.convert(daysDiff, TimeUnit.MILLISECONDS);
+            int daysDiff = getDaysDifferenceFromCurrentTime(event.getEventDateStart());
             logger.info("Days diff amount: " + daysDiff);
             switch (event.getPriority()) {
                 case HIGH:
                     if (daysDiff == HIGH_PRIOR_DAYS_AMOUNT
                             || daysDiff == MEDIUM_PRIOR_DAYS_AMOUNT
                             || daysDiff == LOW_PRIOR_DAYS_AMOUNT) {
-                        logger.info("Adding event notification for high priority for user: " 
+                        logger.info("Adding event notification for high priority for user: "
                                 + user.getLogin());
                         result.add(event);
                     }
@@ -90,27 +92,45 @@ public class EventService implements IEventService, Serializable {
                 case MEDIUM:
                     if (daysDiff == MEDIUM_PRIOR_DAYS_AMOUNT
                             || daysDiff == LOW_PRIOR_DAYS_AMOUNT) {
-                        logger.info("Adding event notification for medium priority for user: " 
+                        logger.info("Adding event notification for medium priority for user: "
                                 + user.getLogin());
                         result.add(event);
                     }
                     break;
                 case LOW:
                     if (daysDiff == LOW_PRIOR_DAYS_AMOUNT) {
-                        logger.info("Adding event notification for low priority for user: " 
+                        logger.info("Adding event notification for low priority for user: "
                                 + user.getLogin());
                         result.add(event);
                     }
                     break;
             }
             if (daysDiff == event.getCustomReminder() && !result.contains(event)) {
-                logger.info("Adding event notification custom reminder for user: " 
-                                + user.getLogin());
+                logger.info("Adding event notification custom reminder for user: "
+                        + user.getLogin());
                 result.add(event);
             }
         }
 
         return result;
+    }
+
+    @Override
+    public int getDaysDifferenceFromCurrentTime(Date date) {
+        Calendar calcDate = Calendar.getInstance();
+        calcDate.setTime(date);
+
+        Calendar current = Calendar.getInstance();
+        current.setTime(new Date());
+
+        return Days.daysBetween(
+                new LocalDate(current.get(Calendar.YEAR),
+                        current.get(Calendar.MONTH),
+                        current.get(Calendar.DAY_OF_MONTH)),
+                new LocalDate(calcDate.get(Calendar.YEAR),
+                        calcDate.get(Calendar.MONTH),
+                        calcDate.get(Calendar.DAY_OF_MONTH)))
+                .getDays();
     }
 
 }

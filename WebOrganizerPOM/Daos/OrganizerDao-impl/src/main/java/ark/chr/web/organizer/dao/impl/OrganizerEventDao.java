@@ -36,4 +36,11 @@ public class OrganizerEventDao extends CrudDao<OrganizerEvent> implements IOrgan
         return (OrganizerEvent) query.uniqueResult();
     }
 
+    @Override
+    public List<OrganizerEvent> findAllEventsForUserWhereStartDateGreaterEqualThanNow(OrganizerUser user) {
+        Query query = getSession().createQuery("from OrganizerEvent where owner = :user and eventDateStart >= current_date");
+        query.setParameter("user", user);
+        return query.list();
+    }
+
 }
