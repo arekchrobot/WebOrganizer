@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
@@ -125,10 +124,10 @@ public class EventService implements IEventService, Serializable {
 
         return Days.daysBetween(
                 new LocalDate(current.get(Calendar.YEAR),
-                        current.get(Calendar.MONTH),
+                        current.get(Calendar.MONTH)+1,
                         current.get(Calendar.DAY_OF_MONTH)),
                 new LocalDate(calcDate.get(Calendar.YEAR),
-                        calcDate.get(Calendar.MONTH),
+                        calcDate.get(Calendar.MONTH)+1,
                         calcDate.get(Calendar.DAY_OF_MONTH)))
                 .getDays();
     }

@@ -9,11 +9,9 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.SelectEvent;
@@ -57,22 +55,23 @@ public class ScheduleView implements Serializable {
             schedule.addEvent(new DefaultScheduleEvent(allUserEvent.getName(),
                     allUserEvent.getEventDateStart(), allUserEvent.getEventDateEnd()));
         }
-
-        List<FacesMessage> growls = new ArrayList<>();
-        try {
-            growls = notifications.createNotificationMessagesForUser(user);
-        } catch (ParseException ex) {
-            logger.error("ParserException in ScheduleView init");
-        }
-        if (!growls.isEmpty()) {
-            logger.info("Amount of growls: " + growls.size());
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            for (FacesMessage growl : growls) {
-                facesContext.addMessage(null, growl);
-            }
-        } else {
-            logger.info("No growls created.");
-        }
+        
+        generateGrowlsForUser(user);
+//        List<FacesMessage> growls = new ArrayList<>();
+//        try {
+//            growls = notifications.createNotificationMessagesForUser(user);
+//        } catch (ParseException ex) {
+//            logger.error("ParserException in ScheduleView init");
+//        }
+//        if (!growls.isEmpty()) {
+//            logger.info("Amount of growls: " + growls.size());
+//            FacesContext facesContext = FacesContext.getCurrentInstance();
+//            for (FacesMessage growl : growls) {
+//                facesContext.addMessage(null, growl);
+//            }
+//        } else {
+//            logger.info("No growls created.");
+//        }
     }
 
     public ScheduleModel getSchedule() {
@@ -97,5 +96,23 @@ public class ScheduleView implements Serializable {
                 selected.getStartDate(), ((UserDetailsAdapter) SecurityContextHolder
                 .getContext().getAuthentication().getPrincipal()).getUser());
         logger.info("Showing details for event: " + event.getId());
+    }
+    
+    private void generateGrowlsForUser(OrganizerUser user) {
+        List<FacesMessage> growls = new ArrayList<>();
+        try {
+            growls = notifications.createNotificationMessagesForUser(user);
+        } catch (ParseException ex) {
+            logger.error("ParserException in ScheduleView init");
+        }
+        if (!growls.isEmpty()) {
+            logger.info("Amount of growls: " + growls.size());
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            for (FacesMessage growl : growls) {
+                facesContext.addMessage(null, growl);
+            }
+        } else {
+            logger.info("No growls created.");
+        }
     }
 }
